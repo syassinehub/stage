@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yassine Sghaier - Blog de Stage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 0,0 1000,0 1000,80 0,100"/></svg>') bottom;
+            background-size: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .header-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        section:nth-child(even) {
+            background: white;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1a1a1a;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .card-content {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateX(5px);
+        }
+
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .team-member {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Articles */
+        .article {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .article:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            position: relative;
+        }
+
+        .article-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            font-weight: bold;
+            opacity: 0.3;
+        }
+
+        .article-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .article-meta {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .article-content {
+            padding: 30px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Contact */
+        .contact-info {
+            text-align: center;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .grid, .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Intersection Observer Animation */
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title">Yassine Sghaier</h1>
+                <p class="header-subtitle">Étudiant en Bachelor 2 Informatique à Ynov Lyon<br>
+                Spécialisation Cybersécurité & Infrastructure Réseaux</p>
+                <div class="header-badge">📍 Stage à la Mairie de Saint-Fons</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#accueil">🏠 Accueil</a></li>
+                <li><a href="#apropos">👤 À propos</a></li>
+                <li><a href="#entreprise">🏢 Entreprise</a></li>
+                <li><a href="#articles">📝 Articles</a></li>
+                <li><a href="#bilan">📊 Bilan</a></li>
+                <li><a href="#contact">📧 Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Section Accueil -->
+    <section id="accueil">
+        <div class="container">
+            <h2 class="section-title">Bienvenue sur mon blog de stage</h2>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Objectif de ce blog</h3>
+                </div>
+                <div class="card-content">
+                    <p>Ce blog a pour objectif de retracer mon parcours de stage au sein de la Mairie de Saint-Fons, de présenter les missions que j'ai réalisées, et de montrer mon évolution professionnelle dans le domaine de l'informatique et des réseaux.</p>
+                    <p>À travers mes articles, je partage mes apprentissages techniques, mes réflexions sur le métier d'informaticien et les compétences développées lors de cette expérience enrichissante.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À propos -->
+    <section id="apropos">
+        <div class="container">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">👨‍💻</div>
+                        <h3 class="card-title">Profil</h3>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>Nom :</strong> Yassine Sghaier</p>
+                        <p><strong>Âge :</strong> 19 ans</p>
+                        <p><strong>Formation :</strong> Bachelor 2 Informatique à Ynov Lyon</p>
+                        <p><strong>Spécialisation visée :</strong> Cybersécurité ou Infrastructure Réseaux</p>
+                        <p>En 3ème année, je souhaite me spécialiser selon les opportunités professionnelles qui s'offriront à moi.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">Objectifs Professionnels</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Je souhaite développer mes compétences en <strong>sécurité informatique</strong> et en <strong>administration réseaux</strong>, afin de devenir un professionnel capable d'accompagner les entreprises dans leur transformation numérique et dans la protection de leurs systèmes d'information.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Mes Compétences</h3>
+                </div>
+                <div class="skills-container">
+                    <div class="skill-item">
+                        <div class="skill-icon">💻</div>
+                        <span>Installation et configuration de postes de travail</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🎫</div>
+                        <span>Gestion des tickets et assistance utilisateurs</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🔄</div>
+                        <span>Mise à jour de systèmes et pilotes Windows</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🌐</div>
+                        <span>Intégration de postes dans un domaine Active Directory</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🏠</div>
+                        <span>Préparation de postes pour le télétravail</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">🔧</div>
+                        <span>Dépannage technique sur site</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">👥</div>
+                        <span>Organisation et travail en équipe</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon">💬</div>
+                        <span>Communication avec les utilisateurs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Entreprise -->
+    <section id="entreprise">
+        <div class="container">
+            <h2 class="section-title">Présentation de l'entreprise</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🏛️</div>
+                    <h3 class="card-title">Mairie de Saint-Fons</h3>
+                </div>
+                <div class="card-content">
+                    <p>Mon stage s'est déroulé au sein de la <strong>Mairie de Saint-Fons</strong>, une collectivité territoriale située dans la métropole de Lyon.</p>
+                    <p>La mairie est composée de nombreux services qui œuvrent quotidiennement au service des habitants : urbanisme, ressources humaines, culture, jeunesse, et bien sûr, le service informatique.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">💻</div>
+                    <h3 class="card-title">Le Service Informatique</h3>
+                </div>
+                <div class="card-content">
+                    <p>Le service informatique est en charge de la gestion de l'ensemble du parc informatique des bâtiments municipaux : écoles, bibliothèques, crèches, gymnases, services administratifs, etc.</p>
+                    
+                    <h4 style="margin: 25px 0 15px 0; color: #1a1a1a;">L'équipe :</h4>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="team-avatar">PP</div>
+                            <h4>Philippe Pourrey</h4>
+                            <p>Directeur du service informatique</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">O</div>
+                            <h4>Oualid</h4>
+                            <p>Administrateur réseaux</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">T</div>
+                            <h4>Tidiane</h4>
+                            <p>Administrateur réseaux</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">F</div>
+                            <h4>Faycal</h4>
+                            <p>Technicien informatique<br><small>(Mon référent principal)</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Articles -->
+    <section id="articles">
+        <div class="container">
+            <h2 class="section-title">Articles de Blog</h2>
+            
+            <article class="article animate">
+                <div class="article-header">
+                    <div class="article-number">01</div>
+                    <h3 class="article-title">Mes premières interventions sur le terrain</h3>
+                    <div class="article-meta">💼 Intervention technique • 🎯 Développement de l'autonomie</div>
+                </div>
+                <div class="article-content">
+                    <p>L'une des principales missions de mon stage consistait à intervenir directement sur les sites municipaux lorsqu'un problème informatique était signalé.</p>
+                    <p>Avec Faycal, nous nous déplaçions dans les écoles, mairies annexes ou autres bâtiments publics pour résoudre les pannes : ordinateurs qui ne démarrent plus, imprimantes bloquées, problèmes de réseau ou encore installation de nouveaux postes.</p>
+                    <p><strong>Apprentissages :</strong> Ces interventions m'ont permis de développer mon autonomie, mon sens de l'analyse et surtout mon contact avec les utilisateurs. J'ai appris l'importance de l'écoute active et de la communication claire avec des personnes non-techniques.</p>
+                </div>
+            </article>
+
+            <article class="article animate">
+                <div class="article-header">
+                    <div class="article-number">02</div>
+                    <h3 class="article-title">L'installation et la configuration de nouveaux postes</h3>
+                    <div class="article-meta">⚙️ Configuration système • 🔐 Sécurité & domaines</div>
+                </div>
+                <div class="article-content">
+                    <p>Une autre partie importante de mon travail a été l'installation de nouveaux ordinateurs portables destinés aux agents, notamment pour le télétravail.</p>
+                    <p>Je préparais chaque poste en lançant les mises à jour Windows, en installant les pilotes nécessaires et en configurant l'intégration au domaine de la mairie. Ensuite, je plaçais l'ordinateur dans les bonnes Unités d'Organisation (OU) afin que les applications nécessaires soient installées automatiquement.</p>
+                    <p><strong>Compétences développées :</strong> Maîtrise d'Active Directory, compréhension des GPO (Group Policy Objects), automatisation des déploiements et sécurisation des postes de travail.</p>
+                    <p>C'était une étape essentielle pour garantir que chaque agent dispose d'un poste prêt à l'emploi, fiable et sécurisé.</p>
+                </div>
+            </article>
+
+            <article class="article animate">
+                <div class="article-header">
+                    <div class="article-number">03</div>
+                    <h3 class="article-title">La gestion des tickets et du stock – un outil essentiel</h3>
+                    <div class="article-meta">📊 Organisation • 🎫 GLPI • 📦 Gestion des stocks</div>
+                </div>
+                <div class="article-content">
+                    <p>Un élément central de l'organisation du service est l'utilisation d'un logiciel de gestion des tickets et du stock informatique (comme GLPI).</p>
+                    
+                    <p><strong>Cet outil permet :</strong></p>
+                    <ul style="margin: 15px 0; padding-left: 25px; line-height: 1.8;">
+                        <li>de centraliser toutes les demandes des utilisateurs</li>
+                        <li>de prioriser les interventions selon leur criticité</li>
+                        <li>de garder un suivi clair et précis des résolutions</li>
+                        <li>de gérer le matériel (PC, écrans, téléphones, accessoires) et de savoir en temps réel ce qui est disponible</li>
+                    </ul>
+                    
+                    <p><strong>Réflexion :</strong> Sans cet outil, le service serait rapidement désorganisé et risquerait d'oublier certaines demandes. Pour moi, il représente la colonne vertébrale du service informatique, garantissant son efficacité et sa réactivité.</p>
+                </div>
+            </article>
+
+            <article class="article animate">
+                <div class="article-header">
+                    <div class="article-number">04</div>
+                    <h3 class="article-title">La gestion des appels et des tickets entrants</h3>
+                    <div class="article-meta">📞 Support utilisateur • 💬 Communication • 🤝 Relation client</div>
+                </div>
+                <div class="article-content">
+                    <p>En plus des interventions, j'étais également en charge de répondre au téléphone lorsque des agents appelaient pour signaler un problème ou poser une question.</p>
+                    <p>Ce rôle m'a permis de mieux comprendre l'importance de l'écoute et de la communication dans le métier d'informaticien.</p>
+                    <p><strong>Découverte importante :</strong> Il ne s'agit pas seulement de résoudre un problème technique, mais aussi de rassurer l'utilisateur et de lui expliquer, avec des mots simples, la cause et la solution apportée.</p>
+                    <p>Cette expérience m'a appris la patience, l'empathie et l'art de vulgariser des concepts techniques complexes.</p>
+                </div>
+            </article>
+
+            <article class="article animate">
+                <div class="article-header">
+                    <div class="article-number">05</div>
+                    <h3 class="article-title">Réflexions et apprentissages</h3>
+                    <div class="article-meta">🎓 Apprentissage • 🤔 Réflexion • 💡 Insights</div>
+                </div>
+                <div class="article-content">
+                    <p>Ce stage m'a beaucoup appris, non seulement sur le plan technique, mais aussi sur le plan humain.</p>
+                    <p><strong>Découvertes clés :</strong></p>
+                    <ul style="margin: 15px 0; padding-left: 25px; line-height: 1.8;">
+                        <li>L'importance de l'organisation dans un service informatique</li>
+                        <li>La valeur du travail en équipe et de l'entraide</li>
+                        <li>L'art de la communication avec des utilisateurs non-techniques</li>
+                        <li>Les enjeux liés à la gestion d'un parc informatique de grande taille</li>
+                    </ul>
+                    <p>J'ai aussi mieux compris les enjeux liés à la gestion d'un parc informatique de grande taille, où chaque erreur peut avoir un impact direct sur le bon fonctionnement d'un service municipal.</p>
+                    <p><strong>Lien avec ma formation :</strong> Les cours de réseaux et systèmes d'exploitation ont pris tout leur sens lors de la configuration des domaines Active Directory et de la résolution des problèmes de connectivité.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Section Bilan -->
+    <section id="bilan">
+        <div class="container">
+            <h2 class="section-title">Bilan de Stage</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">✅</div>
+                        <h3 class="card-title">Expérience Acquise</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Cette expérience a été très enrichissante. Elle m'a permis de confirmer mon intérêt pour l'administration systèmes et réseaux, tout en développant mes compétences techniques.</p>
+                        <p><strong>Points forts développés :</strong> autonomie, capacité d'analyse, communication, travail en équipe et résolution de problèmes complexes.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💭</div>
+                        <h3 class="card-title">Ressenti Personnel</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>En termes de ressenti, je retiens avant tout :</p>
+                        <ul style="padding-left: 20px; line-height: 1.8;">
+                            <li>La <strong>diversité des missions</strong> qui évitent la routine</li>
+                            <li>Le <strong>dynamisme du travail en équipe</strong></li>
+                            <li>La <strong>satisfaction d'apporter une solution concrète</strong> aux utilisateurs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🔧</div>
+                        <h3 class="card-title">Outils Découverts</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>J'ai également pris conscience de l'importance des outils collaboratifs comme les logiciels de gestion de tickets (GLPI), qui structurent et fluidifient le travail quotidien.</p>
+                        <p>Ces outils sont essentiels pour maintenir un service de qualité dans une organisation de cette taille.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">📈</div>
+                        <h3 class="card-title">Axes d'Amélioration</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Pour progresser encore, je souhaite approfondir mes compétences en <strong>cybersécurité</strong> et en <strong>infrastructures</strong>, deux domaines essentiels pour assurer la sécurité et la fiabilité des systèmes d'information.</p>
+                        <p><strong>Objectifs futurs :</strong> Obtenir des certifications en sécurité informatique et développer une expertise en architecture réseau.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💡</div>
+                        <h3 class="card-title">Suggestions & Solutions</h3>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>Améliorations suggérées :</strong></p>
+                        <ul style="padding-left: 20px; line-height: 1.8;">
+                            <li>Mise en place d'une documentation technique centralisée</li>
+                            <li>Formation des utilisateurs aux bonnes pratiques informatiques</li>
+                            <li>Automatisation accrue des déploiements</li>
+                            <li>Renforcement de la sécurité par des audits réguliers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🏆</div>
+                        <h3 class="card-title">Compétences Confirmées</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Ce stage a confirmé mes aptitudes pour :</p>
+                        <ul style="padding-left: 20px; line-height: 1.8;">
+                            <li>La <strong>résolution de problèmes complexes</strong></li>
+                            <li>Le <strong>travail en équipe</strong> pluridisciplinaire</li>
+                            <li>L'<strong>adaptation rapide</strong> à de nouveaux environnements</li>
+                            <li>La <strong>communication technique</strong> avec différents profils</li>
+                        </ul>
+                        <p>Ces compétences seront essentielles pour ma future carrière en informatique.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+                <h3 style="margin-bottom: 30px; font-size: 1.5rem;">Restons en contact</h3>
+                <div class="contact-item">
+                    <strong>📧 Email :</strong> yassine.sghaier@ynov.com
+                </div>
+                <div class="contact-item">
+                    <strong>🎓 École :</strong> Ynov Lyon - Bachelor Informatique
+                </div>
+                <div class="contact-item">
+                    <strong>📍 Lieu de stage :</strong> Mairie de Saint-Fons
+                </div>
+                <div class="contact-item" href="www.linkedin.com/in/yassine-sghaier-560b3832a">
+                    <strong>💼 LinkedIn :</strong> Yassine Sghaier
+                </div>
+                
+                <!-- CV Download Section -->
+                <div style="margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 20px; color: white;">
+                    <h4 style="margin-bottom: 20px; font-size: 1.3rem;">📄 Télécharger mon CV</h4>
+                    <p style="margin-bottom: 25px; opacity: 0.9; line-height: 1.6;">
+                        Découvrez mon parcours complet, mes compétences techniques et mes expériences professionnelles
+                    </p>
+                    <a href="Yassine_Sghaier_CV (1).pdf (1).pdf" download="CV_Yassine_Sghaier_2024.pdf" class="cv-download-btn">
+                        <span class="download-icon">⬇️</span>
+                        <span class="download-text">Télécharger CV (PDF)</span>
+                        <span class="download-size">• Format A4 • 2024</span>
+                    </a>
+                </div>
+                
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 2px solid #f0f0f0;">
+                    <p style="color: #666; line-height: 1.6;">
+                        N'hésitez pas à me contacter pour discuter de mon expérience de stage, 
+                        d'opportunités professionnelles ou pour échanger sur les métiers de l'informatique 
+                        et des réseaux.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Yassine Sghaier - Blog de Stage | Ynov Lyon - Bachelor Informatique</p>
+            <p style="margin-top: 10px; opacity: 0.7; font-size: 0.9rem;">
+                Stage réalisé à la Mairie de Saint-Fons - Service Informatique
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animate elements
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add active navigation highlighting
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add parallax effect to header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            
+            // Animate sections on load
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // Add hover effects for cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add typing effect for header subtitle
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect after load
+        setTimeout(() => {
+            const subtitle = document.querySelector('.header-subtitle');
+            if (subtitle) {
+                const originalText = subtitle.textContent;
+                typeWriter(subtitle, originalText, 30);
+            }
+        }, 500);
+    </script>
+
+    <style>
+        /* Additional styles for enhanced UX */
+        .nav-links a.active {
+            color: #667eea;
+        }
+        
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        /* Enhanced card hover effects */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Improved mobile responsiveness */
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 2rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            nav, footer {
+                display: none;
+            }
+            
+            section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+        
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+        
+        /* Focus states for accessibility */
+        .nav-links a:focus,
+        .card:focus {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+        
+        /* CV Download Button Styles */
+        .cv-download-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cv-download-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .cv-download-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .download-icon {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .cv-download-btn:hover .download-icon {
+            transform: translateY(3px);
+            animation: bounce 0.6s ease-in-out;
+        }
+        
+        .download-text {
+            font-weight: 600;
+        }
+        
+        .download-size {
+            opacity: 0.8;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-3px);
+            }
+            60% {
+                transform: translateY(-2px);
+            }
+        }
+        
+        /* Responsive CV button */
+        @media (max-width: 768px) {
+            .cv-download-btn {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+                padding: 20px 30px;
+            }
+            
+            .download-size {
+                font-size: 12px;
+            }
+        }
+    </style>
+</body>
+</html>
